@@ -35,21 +35,6 @@ Check "gh copilot --version succeeds"             { (gh copilot --version 2>$nul
 # VS Code
 Check "code --version succeeds"                   { (code --version 2>$null) -ne $null }
 
-# .NET SDK
-Check "dotnet --version starts with 10."          { (dotnet --version 2>$null) -match '^10\.' }
-
-# Python & uv
-Check "python --version starts with 3.14"         { (python --version 2>$null) -match '3\.14\.' }
-Check "uv --version succeeds"                     { (uv --version 2>$null) -ne $null }
-
-# Node.js / npm / nvm
-Check "node --version starts with v24."           { (node --version 2>$null) -match '^v24\.' }
-Check "npm --version succeeds"                    { (npm --version 2>$null) -ne $null }
-Check "nvm version succeeds"                      { (nvm version 2>$null) -ne $null }
-
-# Oh My Posh
-Check "oh-my-posh --version succeeds"             { (oh-my-posh --version 2>$null) -ne $null }
-
 # Copilot plugins
 Check "win-dev-skills marketplace source present" { (copilot plugin marketplace list 2>$null) -match 'win-dev-skills' }
 Check "winui plugin listed from win-dev-skills"   { (copilot plugin list 2>$null) -match 'winui' }

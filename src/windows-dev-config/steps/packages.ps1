@@ -20,15 +20,8 @@ function Invoke-PackagesPhase {
         @{ Name = 'GitHubCLI';     Id = 'GitHub.cli' }
         @{ Name = 'GitHubCopilot'; Id = 'GitHub.Copilot' }
         @{ Name = 'VSCode';        Id = 'Microsoft.VisualStudioCode'; Large = $true }
-        @{ Name = 'DotnetSdk';     Id = 'Microsoft.DotNet.SDK.10';    Large = $true }
-        @{ Name = 'Python';        Id = 'Python.Python.3.14' }
-        @{ Name = 'UV';            Id = 'astral-sh.uv' }
-        @{ Name = 'NodeJS';        Id = 'OpenJS.NodeJS.LTS' }
-        @{ Name = 'nvmForNode';    Id = 'CoreyButler.NVMforWindows' }
         @{ Name = 'Coreutils';     Id = 'Microsoft.Coreutils' }
-        @{ Name = 'OhMyPosh';      Id = 'JanDeDobbeleer.OhMyPosh' }
-        @{ Name = 'winappCli';     Id = 'Microsoft.WinAppCli' }
-        @{ Name = 'PowerToys';     Id = 'Microsoft.PowerToys';        Large = $true }
+        @{ Name = 'RancherDesktop'; Id = 'SUSE.RancherDesktop';       Large = $true }
     )
 
     # ArgumentList binds each package's Id at call time instead of relying on closure capture.
@@ -45,12 +38,6 @@ function Invoke-PackagesPhase {
             } `
             -ArgumentList @($pkg.Id, $pkg.ContainsKey('Large'))
     }
-
-    $powerToysToastKey = 'HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Notifications\Settings\Microsoft.PowerToysWin32'
-    $steps += New-DevConfigStep -Name 'PowerToysAOT' -Description 'Turn off PowerToys always-on-top notifications' `
-        -Check { param($KeyPath) Test-DevConfigRegistryValue -KeyPath $KeyPath -ValueName 'Enabled' -Value 0 } `
-        -Apply { param($KeyPath) Set-DevConfigRegistryValue -KeyPath $KeyPath -ValueName 'Enabled' -Value 0 } `
-        -ArgumentList @($powerToysToastKey)
 
     Invoke-DevConfigSteps -Steps $steps
 }

@@ -81,7 +81,7 @@ Write-Host ''
 if ($Script:DevConfigResumed) {
     Write-Host 'Welcome back. Resuming Calm OS setup after the reboot...' -ForegroundColor Cyan
 } else {
-    Write-Host 'Calm OS setup -- 11 phases, one reboot along the way (expected, not an error)' -ForegroundColor Cyan
+    Write-Host 'Calm OS setup -- 10 phases, one reboot along the way (expected, not an error)' -ForegroundColor Cyan
 }
 
 # WSL stays last so its required reboot happens after other phases.
@@ -94,7 +94,6 @@ $phases = @(
     @{ File = 'edge.ps1';                    Function = 'Invoke-EdgePhase';                   Title = 'Microsoft Edge tweaks' }
     @{ File = 'fonts.ps1';                   Function = 'Invoke-FontsPhase';                  Title = 'Fonts' }
     @{ File = 'terminal.ps1';                Function = 'Invoke-TerminalPhase';               Title = 'Windows Terminal' }
-    @{ File = 'powershell-profile.ps1';      Function = 'Invoke-PowerShellProfilePhase';      Title = 'PowerShell profile' }
     @{ File = 'copilot.ps1';                 Function = 'Invoke-CopilotPhase';                Title = 'GitHub Copilot' }
     @{ File = 'wsl.ps1';                     Function = 'Invoke-WslPhase';                    Title = 'WSL + Ubuntu' }
 )
